@@ -27,20 +27,15 @@ cameraBtn.addEventListener("click", function() {
         navigator.permissions.query({ name: 'camera' }).then(function(permissionStatus) {
           if(permissionStatus.state === 'granted'){
             startStreaming();
-          } else if (permissionStatus.state === 'prompt') {
-            permissionStatus.onchange = function() {
-              if (permissionStatus.state === 'granted') {
-                startStreaming();
-              }
-            }
-            navigator.permissions.request({ name: 'camera' });
           } else {
             console.log("Permission denied for the camera");
             errorMsg.innerText = "Permission denied for the camera";
             const img = document.createElement('img');
+            const img2 = document.createElement('img');
             img.src="./turn-on-your-camera.png";
+            img2.src="./allow-camera.png";
             document.getElementById('err').appendChild(img);
-            // alert("Permission denied for the camera");
+            document.getElementById('err').appendChild(img2);
           }
         });
       } else {
